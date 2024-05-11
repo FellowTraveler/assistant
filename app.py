@@ -317,33 +317,6 @@ def processAddRemoveShowCommands(cmd_parts):
 # create_xml_agent
 
 
-class IntentExtratorTool(BaseTool):
-    """Tool for extracting the user's intents from his newest message"""
-
-    name = "intent extractor"
-    description = (
-        "This tool extracts all of the user's intents from his newest message, using chat history as context."
-    )
-
-    def _run(
-        self,
-        query: str,
-        run_manager=None,
-    ) -> str:
-        """Tool for extracting the user's intents from his most recent message, using the chat history as context."""
-        run_sync(cl.Message(content=query).send())
-        return "Thank you for the information, now please use a different tool or come up with your final answer."
-
-    async def _arun(
-        self,
-        query: str,
-        run_manager=None,
-    ) -> str:
-        """Tool for extracting the user's intents from his most recent message, using the chat history as context."""
-        await cl.Message(content=query).send()
-        return "Thank you for the information, now please use a different tool or come up with your final answer."
-
-
 class HumanInputChainlit(BaseTool):
     """Tool that requests clarification from the human."""
 

@@ -20,16 +20,16 @@ class BaseAgent(ABC):
         self.runnable_config_ = None
         self.user_id_ = None
         self.session_id_ = None
-
-    def setUIAsyncCallback(self, cb):
-        self.ui_async_callback_ = cb
     
     def getUserAndSessionId(self) -> Tuple[Optional[str], Optional[str]]:
         return (self.user_id_, self.session_id_)
-        
+
     def setUserAndSessionId(self, user_id, session_id):
         self.user_id_ = user_id
         self.session_id_ = session_id
+
+    def setUIAsyncCallback(self, cb):
+        self.ui_async_callback_ = cb
 
     class AgentType(Enum):
         SIMPLE = (auto(), True, "SimpleAgent", "This is a **Simple Agent**.")
@@ -78,7 +78,7 @@ class BaseAgent(ABC):
         """
         Method to initialize and return the internal agent implementation.
         """
-        raise Exception("Missing create_agent implementation.")
+        raise Exception("Missing create_llm implementation.")
 
     @abstractmethod
     def create_tools(self, tools):
